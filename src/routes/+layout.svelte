@@ -3,10 +3,11 @@
 	import { base } from '$app/paths';
 	let { children } = $props();
 </script>
-
-<a href="{base}/">Home</a>
-<a href="{base}/about">About</a>
-
+<nav>
+	<a href="{base}/">Home</a>
+	<a href="{base}/about">About</a>
+	<a href="/photoapp">Photo App</a>
+</nav>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
