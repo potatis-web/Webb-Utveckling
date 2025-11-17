@@ -24,7 +24,7 @@
         text-align: center;
         font-size: 50px;
         margin: 20px;
-        color: cadetblue;
+        color: cornflowerblue;
     }
 
 
