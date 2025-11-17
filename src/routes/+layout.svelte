@@ -5,8 +5,7 @@
 </script>
 <nav>
 	<a href="{base}/">Home</a>
-	<a href="{base}/about">About</a>
-	<a href="/photoapp">Photo App</a>
+	<a href="{base}/photoapp">Photo App</a>
 </nav>
 
 <svelte:head>
