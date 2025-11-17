@@ -1,33 +1,66 @@
+<script>
+    let image = "https://picsum.photos/id/70/367/267"
+    let photo = "https://picsum.photos/id/88/367/267"
+    let picture = "https://picsum.photos/id/93/367/267"
+</script>
+
+
 <h1>Photoapp</h1>
 <p>Denna sida innehåller <strong>fina</strong> bilder</p>
 <div class="photos">
-    <div>
-        <img src="https://i.redd.it/rofzm44oka091.png" alt="Flexbox egenskaper">
+    <div class="image-wrapper">
+        <img src={image} alt="Flexbox egenskaper">
     </div>
-    <div>
-        <img src="https://i.redd.it/vd9dc7wfk9471.png" alt="Flexbox egenskaper">
+    <div class="image-wrapper">
+        <img src={photo} alt="Flexbox egenskaper">
     </div>
-    <div>
-        <img src="https://miro.medium.com/v2/resize:fit:1400/0*YeaUsQyhXSL1TCTH.png" alt="Flexbox egenskaper">
+    <div class="image-wrapper">
+        <img src={picture} alt="Flexbox egenskaper">
     </div>
-    
-   
 </div>
 <style>
+
+    h1{
+        text-align: center;
+        font-size: 50px;
+        margin: 20px;
+        color: cadetblue;
+    }
+
+
     .photos {
         display: flex;
         max-width: 90vw;
         overflow: hidden;
         align-items: center;
         justify-content: center;
-    }
-    .photos img{
-    /*Bredden på en bild, som ligger inom vår flex container,photos,
-        är 100% av containers storlek (dess förälder)*/
-        width: 50%;
+        flex-wrap: wrap;
+        background-color: gainsboro;
     }
 
+
+
+    .image-wrapper {
+        flex-grow: 1;
+        flex-basis: 300px;
+        margin: 0.8rem;
+        transition: scale 0.5s, flex 0.5s;
+        width: 300px;
+
+        
+    }
+    
     .image-wrapper img {
         width: 100%;
+        border-radius: 20px;
+        box-shadow: 4px 8px 10px rgba(0,0,0,0.2);
+    }
+
+    .image-wrapper:hover {
+        flex-grow:2;
+    }
+
+    .image-wrapper:active {
+        scale: 0.9;
     }
 </style>
