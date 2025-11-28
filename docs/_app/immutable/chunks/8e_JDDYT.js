@@ -1,0 +1,1 @@
+import{w as s}from"./CbeLWFEB.js";function a(e){return function(...t){var r=t[0];return r.preventDefault(),e?.apply(this,t)}}const o=window?.localStorage.getItem("users")??"",n=s(o);n.subscribe(e=>{window?.localStorage.setItem("users",e)});export{a as p,n as u};
