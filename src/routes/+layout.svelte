@@ -7,6 +7,7 @@
 	<a href="{base}/">Home</a>
 	<a href="{base}/photoapp">Photo App</a>
 	<a href="{base}/register">Register</a>
+	<a href="{base}/shoppinglist">Shopping list</a>
 </nav>
 
 <svelte:head>
