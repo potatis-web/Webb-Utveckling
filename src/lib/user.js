@@ -14,4 +14,3 @@ if (browser) {
                 window?.localStorage.setItem('users', value);
         })
 }
-                            

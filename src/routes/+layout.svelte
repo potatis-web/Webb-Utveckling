@@ -9,6 +9,7 @@
 	<a href="{base}/register">Register</a>
 	<a href="{base}/shoppinglist">Shopping list</a>
 	<a href="{base}/prov">Prov</a>
+	<a href="{base}/memory">Memory Game</a>
 </nav>
 
 <svelte:head>
