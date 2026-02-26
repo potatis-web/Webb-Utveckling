@@ -10,6 +10,8 @@
 	<a href="{base}/shoppinglist">Shopping list</a>
 	<a href="{base}/prov">Prov</a>
 	<a href="{base}/memory">Memory Game</a>
+	<a href="{base}/chat">Chat</a>
+	<a href="{base}/search">Search</a>
 </nav>
 
 <svelte:head>
@@ -24,6 +26,5 @@
 	height: 100vh;
 	width: 100vw;
 	}    
-
 </style>
 {@render children?.()}
