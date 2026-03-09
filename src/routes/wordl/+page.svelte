@@ -4,7 +4,9 @@
   let prevGuesses = $state([])
   let applyShake = $state(false);
   let waiting = $state(false);
-  let win = false;
+  let gameEnd = $state(false);
+  let gameText = $state(false);
+  
   const str = 'qwertyuiopasdfghjklzxcvbnm';
   const letters = str.split("");
   const prevLetters = $state([])
@@ -12,7 +14,7 @@
     const obj = {char: l, correct_idx: false, in_word: false, guessed: false};
     prevLetters.push(obj);
   }
-  $inspect(prevGuesses);
+  $inspect(prevLetters);
 
   async function handleGuess() {
     if (waiting) return;
@@ -83,28 +85,33 @@
 
     if (data.is_correct) {
       // Win logic here
-      prevGuesses = [...prevGuesses, data.character_info];
+      gameEnd = true;
+      gameText = "You won! 🎉"
       return;
     }
 
     // Update letters
-    for (let i = 0; i < data.character_info.length - 1 ; i++) {
+    for (let i = 0; i <= data.character_info.length - 1; i++) {
       const target = data.character_info[i];
       const targetLetter = target.char.toLowerCase();
       for (const j of prevLetters) {
         // If guessed letter is not in word
-        if (targetLetter !== j) {
+        if (targetLetter !== j.char) {
           continue;
         }
+        
         // If guessed letter is in word
-        if (target.in_word) {
+        if (target.scoring.in_word) {
+          console.log(`"${j.char}" is in word`);
           j.in_word = true;
         }
         // If guessed letter is in the right position
-        if (target.correct_idx) {
+        if (target.scoring.correct_idx) {
+          console.log(`"${j.char}" is correct`);
           j.correct_idx = true;
         }
-        if (!target.in_word && !target.correct_idx){
+        if (!target.scoring.in_word && !target.scoring.correct_idx) {
+          console.log(`"${j.char}" is not in word`);
           j.guessed = true;
         }
       }
@@ -113,10 +120,14 @@
     
     prevGuesses = [...prevGuesses, data.character_info];
     currentGuess = [];
-    if (prevGuesses.length === 6) alert('you lose');
+    if (prevGuesses.length === 6) {
+      gameEnd = true;
+      gameText = "You lost!"
+    }
   }
   function onKeyDown(e) {
     e.preventDefault();
+    if (gameEnd) return;
     if (e.key === 'Backspace') currentGuess.pop();
     if (currentGuess.length === 5 && e.key === 'Enter' ) handleGuess();
     if (currentGuess.length === 5) return;
@@ -126,6 +137,10 @@
     applyShake = true;
     setTimeout(() => {applyShake = false;}, 1000)
   }
+  function updateTime() {
+    time = Date.now()
+  }
+  // setInterval(updateTime, 1000)
 </script>
 <title>Wordl</title>
 
@@ -183,6 +198,11 @@
     {/each}
   </span>
 </main>
+{#if gameEnd}
+  <span class="backdrop">
+    <dialog open class="">{gameText}<br>Guesses: {prevGuesses.length+1}</dialog>
+  </span>
+{/if}
 
 
 <aside class="big-text">{prevGuesses.length}/6</aside>
@@ -191,8 +211,20 @@
   * {
     transition: all 0.3s;
   }
+  dialog {
+    color: #e0e0e0;
+    position: absolute;
+    width: 25%;
+    background: #333;
+    text-align: center;
+    font-size: xx-large;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    top: 40%;
+    border-radius: 10px;
+  }
   main {
-    background-color: #333333;
+    background-color: #333;
     height: calc(100vh - 19px);
     width: 100vw;
     display: inline-flex;
@@ -269,6 +301,16 @@
     text-align: center;
     vertical-align: middle;
     border-radius: 4px;
+  }
+  .backdrop {
+    display: block;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
   }
   .guessed {
     background-color: #1f1f1f;

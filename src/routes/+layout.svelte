@@ -12,6 +12,7 @@
 	<a href="{base}/memory">Memory Game</a>
 	<a href="{base}/chat">Chat</a>
 	<a href="{base}/search">Search</a>
+	<a href="{base}/wordl">Wordl</a>
 </nav>
 
 <svelte:head>
